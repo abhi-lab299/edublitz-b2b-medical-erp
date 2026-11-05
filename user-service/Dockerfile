@@ -1,31 +1,25 @@
-# ─── Stage 1: Build ───────────────────────────────────────────────────────────
-FROM eclipse-temurin:17-jdk-alpine AS builder
+# Stage 1: Build
+FROM maven:3.9.9-eclipse-temurin-17-alpine AS builder
 
 WORKDIR /app
 
-# Cache dependencies first (only re-downloaded when pom.xml changes)
 COPY pom.xml .
-RUN --mount=type=cache,target=/root/.m2 \
-    mvn dependency:go-offline -B || true
-
 COPY src ./src
-RUN --mount=type=cache,target=/root/.m2 \
-    mvn clean package -DskipTests -B
 
-# ─── Stage 2: Runtime ─────────────────────────────────────────────────────────
+RUN mvn clean package -DskipTests -B
+
+# Stage 2: Runtime
 FROM eclipse-temurin:17-jre-alpine AS runtime
 
-# Non-root user for security
 RUN addgroup -S appgroup && adduser -S appuser -G appgroup
-USER appuser
 
 WORKDIR /app
 
 COPY --from=builder /app/target/*.jar app.jar
 
-# Health check
-HEALTHCHECK --interval=30s --timeout=10s --start-period=60s --retries=3 \
-  CMD wget -qO- http://localhost:8081/api/v1/actuator/health || exit 1
+RUN chown -R appuser:appgroup /app
+
+USER appuser
 
 EXPOSE 8081
 

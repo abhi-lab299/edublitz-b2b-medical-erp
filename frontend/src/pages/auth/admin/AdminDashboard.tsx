@@ -1,10 +1,10 @@
 import { useQuery } from '@tanstack/react-query'
 import { Package, ShoppingCart, AlertTriangle, Clock } from 'lucide-react'
-import StatCard from '../../components/common/StatCard'
-import { productsApi } from '../../api/products'
-import { ordersApi } from '../../api/orders'
+import StatCard from '../../../components/common/StatCard'
+import { productsApi } from '../../../api/products'
+import { ordersApi } from '../../../api/orders'
 import { formatDistanceToNow } from 'date-fns'
-import { statusBadge, statusLabel } from '../../utils/orderStatus'
+import { statusBadge, statusLabel } from '../../../utils/orderStatus'
 
 export default function AdminDashboard() {
   const { data: lowStock } = useQuery({

@@ -9,7 +9,7 @@ import ProductsPage from './pages/ProductsPage'
 import InventoryPage from './pages/hospital/InventoryPage'
 import OrdersPage from './pages/OrdersPage'
 import OrderDetailPage from './pages/OrderDetailPage'
-import DashboardLayout from './components/layout/DashboardLayout'
+import DashboardLayout from './pages/layout/DashboardLayout'
 import NotFoundPage from './pages/NotFoundPage'
 
 function PrivateRoute({ children }: { children: React.ReactNode }) {

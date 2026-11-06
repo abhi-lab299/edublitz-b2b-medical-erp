@@ -2,7 +2,7 @@ import axios, { AxiosInstance, InternalAxiosRequestConfig, AxiosResponse } from 
 import { useAuthStore } from '../store/authStore'
 
 const createApiClient = (baseURL: string): AxiosInstance => {
-  const client = axios.create({ baseURL, timeout: 60_000 })
+  const client = axios.create({ baseURL, timeout: 120_000 })
 
   client.interceptors.request.use((config: InternalAxiosRequestConfig) => {
     const token = useAuthStore.getState().accessToken

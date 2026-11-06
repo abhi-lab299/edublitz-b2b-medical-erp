@@ -1,8 +1,8 @@
 import { useQuery } from '@tanstack/react-query'
 import { AlertTriangle, Clock, CheckCircle } from 'lucide-react'
-import { productsApi } from '../api/products'
+import { productsApi } from '../../api/products'
 import { format } from 'date-fns'
-import type { InventoryItem } from '../types'
+import type { InventoryItem } from '../../types'
 
 const statusBadge: Record<InventoryItem['status'], string> = {
   IN_STOCK: 'badge-green',
